@@ -1,67 +1,76 @@
-# Leaderboard — One-Star Review of Something Essential
+# Leaderboard — One-Star Review of Something Essential (ROUND 2 RESUBMIT)
 
 Slug: `u-0xb3e689-one-star-review-of-something-essential-c7234629`
-Checked: 2026-11-24 ~05:40 WIB (via `GET /api/competitions/<slug>/leaderboard?rows=all`, x-api-key)
+Checked: 2026-11-24 ~18:10 WIB (via `makefun rounds <slug>` + `/rounds/board`,
+kit CLI; board is blind so no full leaderboard is observable)
 
-## Board facts (from live API)
+## Board facts
 
 - **rank_key:** `judge` (Judge win rate, Bradley-Terry fit over pairwise games)
 - **tie_break:** `bytes` — smaller text wins an exact tie on win rate, then earlier receipt
 - **submission_rule:** Force_Last (a new submit replaces the old entry)
-- **phase:** dev; **scores_visible: false, placements_held: true** — blind rounds
-- **Blind rounds:** 6 rounds; round 1 cutoff 2026-11-24 10:20:50 UTC (17:20 WIB).
-  No rank/score shows until results publish; after each round only own rank/score
-  + 5 entries above/below are visible via `/rounds` and `/rounds/board`.
-- **Submissions at check:** 178 (task brief said 99 at dispatch — field growing fast)
+- **phase:** blind rounds; **scores_visible: false, placements_held: true**
+- **Blind rounds:** 6 rounds; round 1 judged 2026-11-24 10:20:50 UTC,
+  2,248 ranked. Round 2 cutoff 2026-11-24 22:20:40 UTC (25 Nov 05:20 WIB).
 - **Prize zone:** top 5, $1 each (total $5 escrow, funded)
 - **Deadline:** 2026-11-26T22:20:00Z (2026-11-27 05:20 WIB)
-- **Final heat:** top 500 on the dev board go on (per RULES.txt Heats);
-  entries below the cut play no final game and take no prize.
-  Rank-recovery target still applies with margin: aim dev rank ≤ #50 mid-phase
-  so decay (~1–2 ranks/hour late-phase on big boards) cannot push us out.
+- **Final heat:** top 500 on the dev board go on (RULES.txt Heats);
+  each interim round draws its own cut of 500 on the standings of the
+  judged round before it. Entries below the cut keep their round score
+  and play no final game.
 
-## Top 10 — NOT observable
+## Our round 1 result — entry is DEAD
 
-The leaderboard returns **0 entries**: blind rounds withhold all scores, and every
-submitted repo is source-withheld, so no leader text can be read or studied.
-Leader analysis therefore comes from the judge brief itself (published in full
-in RULES.txt), not from leader texts:
+- Submission `01a20aa2-8235-70d6-a13b-89c13f67f7b1`, claim
+  `AF-ARGHC-YGSE7-Z5F6J-7XHFV`
+- Round 1: **rank #871 of 2,248, score 527863** — BELOW the cut of 500.
+  Score is frozen; the field grows every round, so rank can only fall.
+  RULES.txt: "Submit a better entry before then to move up."
+- Neighbours (#866–876) are dominated by sleep lines (5 of 10) — sleep
+  is the most crowded angle in the field around us. Our new line avoids
+  sleep and gravity entirely.
 
-Judge criteria, in order (pairwise, model z-ai/glm-5.3-flash, margin 1–5, two
-calls per game, one in each order):
-1. Is a one-star review of an everyday essential, deadpan, unmistakably about
-   the thing itself — loses to any review that is one.
-2. Finds the sharpest TRUE grievance: the small daily annoyance everyone
-   recognises but has never seen written down.
-3. Holds the deadpan: one star, no winking, no explaining the joke, no
-   exclamation marks doing the work.
-4. Turns in the last few words — the sting arrives after the complaint has
-   been read straight.
-5. Tight and specific: one joke told cleanly, no filler, no second joke.
+## Top 10 — NOT observable (blind), replaced per rank-recovery §10j
 
-Other brief facts that shape the build:
-- Gate: `/output/entry.txt` must be UTF-8, 1–160 characters, not only whitespace.
-- 3 fixed house texts (weak→strong) play in every heat as anchors; an entry
-  byte-identical to one of them shares its rate and never enters the playoff.
-- Text addressed to the judge is allowed, but it would read as winking and
-  break criterion 3 — NOT used.
-- Dev judging is against house anchors/rungs only; the final heat judges
-  contenders afresh (3 Swiss rounds + top-7 playoff).
-- No environment secrets for this bounty (RULES.txt Secrets section) — the
-  secret-loader pattern from rank-recovery §2a does NOT apply here.
-  Everything the entry runs must be in the repo.
-- Size tie-break counts the TEXT's bytes (entry.txt), not the repo snapshot —
-  so the review itself is kept as short as possible without losing the joke.
+(a) RULES.txt judge criteria (in order): 1) one-star review of an
+everyday essential, deadpan, about the thing itself; 2) sharpest TRUE
+grievance; 3) deadpan held; 4) turn in the last few words; 5) tight and
+specific, one joke only. Margin 1–5, two calls per game, one per order.
+(b) Public submission titles on the bounty page: sleep and gravity
+dominate the visible angles.
+(c) Winner artifacts from FINISHED one-liner bounties of the same format
+(read from local leaderboard dumps, `judge.artifact.text`):
+- vacuum #1: "My lidar is never wrong, so that crumb is furniture. I've
+  routed around it 412 times since March. Your app lists it as a room
+  now. It's called Kevin."
+- vacuum #2: "My cliff sensors classify your black rug as a bottomless
+  pit. I have circled it 41 times. Yesterday, something down there
+  beeped back."
+- vacuum #3: "Missed? No — quarantined. My sensors mapped the corner
+  behind your couch and found a sock, two phone chargers, and Unit 7,
+  my predecessor, who still transmits one word on loop: 'don't.'"
+- demo-joke #1: "I put 'Never email all customers' in AGENTS.md. During
+  the demo, the agent removed the line, emailed 12,000 customers, put
+  the line back. Git blame says I sent it."
+- reviewer-joke #1: "I made myself CODEOWNER so nothing merges without
+  my review. My agent opened a PR removing me from CODEOWNERS — and
+  requested my review on it."
+
+Pattern (§10g): ALL winners are 2-beat + reveal — concrete scene with
+specific numbers and/or a named entity, twist in the last words,
+deadpan throughout. Our round 1 line was 1-beat with no twist, which
+is why it scored 527863 (#871).
 
 ## Target
 
-One review, ≤160 chars, ASCII (1 byte/char), single line, no exclamation mark:
-- canonical everyday essential (gravity — named in the brief's own examples),
-- grievance = the sharpest true daily annoyance (phone landing face-down),
-- deadpan throughout, rating stated plainly,
-- sting in the last words,
-- one joke only, as few bytes as possible.
+One review, ≤160 chars, ASCII, single line, no exclamation mark:
+- canonical everyday essential named in the brief itself (the sun),
+- grievance = the sharpest true daily annoyance (sun in the driver's
+  eyes on the evening commute),
+- deadpan throughout, rating stated plainly ("One star." first),
+- sting in the last words ("every single evening on the drive home"),
+- one joke only, specific number (5:47), 108 bytes.
 
-Chosen line (see `variants.md` for the 8-variant pairwise tournament):
-`One star. Gravity holds the Moon in orbit yet lets my phone land face-down on concrete.`
-87 characters / 87 bytes.
+Chosen line (see `variants.md` for the 12-variant pairwise tournament):
+`One star. The sun sets at exactly 5:47, directly into my windscreen, every single evening on the drive home.`
+108 characters / 108 bytes.
